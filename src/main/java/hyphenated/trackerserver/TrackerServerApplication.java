@@ -1,8 +1,12 @@
 package hyphenated.trackerserver;
 
+import hyphenated.trackerserver.db.UserDAO;
+import hyphenated.trackerserver.resources.MainResource;
 import io.dropwizard.Application;
+import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.skife.jdbi.v2.DBI;
 
 public class TrackerServerApplication extends Application<TrackerServerConfiguration> {
 
@@ -21,9 +25,12 @@ public class TrackerServerApplication extends Application<TrackerServerConfigura
     }
 
     @Override
-    public void run(final TrackerServerConfiguration configuration,
+    public void run(final TrackerServerConfiguration config,
                     final Environment environment) {
-        // TODO: implement application
+        final DBIFactory factory = new DBIFactory();
+        final DBI jdbi = factory.build(environment, config.getDataSourceFactory(), "postgresql");
+        final UserDAO dao = jdbi.onDemand(UserDAO.class);
+        environment.jersey().register(new MainResource(dao));
     }
 
 }
