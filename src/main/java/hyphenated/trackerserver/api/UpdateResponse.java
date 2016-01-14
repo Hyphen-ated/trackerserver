@@ -4,20 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.dropwizard.jackson.JsonSnakeCase;
 
 @JsonSnakeCase
-public class UpdateAcknowledgement {
+public class UpdateResponse {
+    @JsonProperty
     private String updatedUser;
 
-    public UpdateAcknowledgement(String updatedUser) {
+    public UpdateResponse(String updatedUser) {
         this.updatedUser = updatedUser;
     }
 
-    @JsonProperty
     public String getUpdatedUser() {
         return updatedUser;
-    }
-
-    @JsonProperty
-    public void setUpdatedUser(String updatedUser) {
-        this.updatedUser = updatedUser;
     }
 }

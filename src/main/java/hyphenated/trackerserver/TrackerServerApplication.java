@@ -3,6 +3,7 @@ package hyphenated.trackerserver;
 import hyphenated.trackerserver.db.UserDAO;
 import hyphenated.trackerserver.resources.MainResource;
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -21,7 +22,7 @@ public class TrackerServerApplication extends Application<TrackerServerConfigura
 
     @Override
     public void initialize(final Bootstrap<TrackerServerConfiguration> bootstrap) {
-        // TODO: application initialization
+        bootstrap.addBundle(new AssetsBundle("/assets", "/trackerserver/usercreated", "index.html"));
     }
 
     @Override

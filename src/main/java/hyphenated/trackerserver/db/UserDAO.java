@@ -8,6 +8,9 @@ public interface UserDAO {
     @SqlUpdate("create table users (name text primary key, token text unique, trackerState text )")
     void createUsersTable();
 
+    @SqlUpdate("delete from users where name = :name")
+    void deleteUser(@Bind("name") String name);
+
     @SqlUpdate("insert into users (name, token, trackerState) values (:name, :token, '')")
     void insertNewUser(@Bind("name") String name, @Bind("token") String token);
 
