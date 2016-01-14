@@ -15,7 +15,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.UUID;
 
-@Path("/trackerapi/")
+@Path("/tracker/api")
 @Produces(MediaType.APPLICATION_JSON)
 public class MainResource {
     private UserDAO dao;

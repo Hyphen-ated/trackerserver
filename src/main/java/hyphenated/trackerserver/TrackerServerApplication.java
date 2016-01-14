@@ -22,7 +22,7 @@ public class TrackerServerApplication extends Application<TrackerServerConfigura
 
     @Override
     public void initialize(final Bootstrap<TrackerServerConfiguration> bootstrap) {
-        bootstrap.addBundle(new AssetsBundle("/assets", "/trackerserver/usercreated", "index.html"));
+        bootstrap.addBundle(new AssetsBundle("/assets", "/tracker/setup/", "index.html"));
     }
 
     @Override
