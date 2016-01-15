@@ -25,6 +25,13 @@ public class MainResource {
     }
 
     @GET
+    @Path("/user/{name}/version")
+    public Optional<String> getStateVersion(@PathParam("name") String name) {
+        String val = dao.getStateVersionByName(name);
+        return Optional.fromNullable(val);
+    }
+
+    @GET
     @Path("/user/{name}/")
     public Optional<String> getTrackerState(@PathParam("name") String name) {
         String val = dao.getTrackerStateByName(name);
