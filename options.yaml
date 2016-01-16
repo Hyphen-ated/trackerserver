@@ -1,4 +1,9 @@
 server:
+    requestLog:
+        appenders:
+          - type: file
+            currentLogFilename: ./logs/access.log
+            archivedLogFilenamePattern: ./logs/access-%d.log.gz
     # if you want to change what port it runs on, you can do that here
     applicationConnectors:
         - type: http
