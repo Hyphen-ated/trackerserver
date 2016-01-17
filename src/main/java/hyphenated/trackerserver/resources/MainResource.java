@@ -13,6 +13,7 @@ import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.UUID;
 
 @Path("/tracker/api")
@@ -27,14 +28,14 @@ public class MainResource {
     @GET
     @Path("/user/{name}/version")
     public Optional<String> getStateVersion(@PathParam("name") String name) {
-        String val = dao.getStateVersionByName(name);
+        String val = dao.getStateVersionByName(name.toLowerCase(Locale.US));
         return Optional.fromNullable(val);
     }
 
     @GET
     @Path("/user/{name}/")
     public Optional<String> getTrackerState(@PathParam("name") String name) {
-        String val = dao.getTrackerStateByName(name);
+        String val = dao.getTrackerStateByName(name.toLowerCase(Locale.US));
         return Optional.fromNullable(val);
     }
 
@@ -58,7 +59,7 @@ public class MainResource {
         String name;
         try {
             JsonNode rootNode = mapper.readTree(twitchAuthUrl.openStream());
-            name = rootNode.get("token").get("user_name").asText();
+            name = rootNode.get("token").get("user_name").asText().toLowerCase(Locale.US);
         } catch (IOException | NullPointerException e) {
             throw new BadRequestException("token not recognized by twitch (or twitch api is down)");
         }
