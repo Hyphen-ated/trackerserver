@@ -4,6 +4,7 @@ package hyphenated.trackerserver.resources;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Optional;
+import hyphenated.trackerserver.api.UpdateReport;
 import hyphenated.trackerserver.api.UpdateResponse;
 import hyphenated.trackerserver.api.UserCreatedResponse;
 import hyphenated.trackerserver.db.UserDAO;
@@ -13,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -37,6 +39,12 @@ public class MainResource {
     public Optional<String> getTrackerState(@PathParam("name") String name) {
         String val = dao.getTrackerStateByName(name.toLowerCase(Locale.US));
         return Optional.fromNullable(val);
+    }
+
+    @GET
+    @Path("/userlist/")
+    public List<UpdateReport> getUserList() {
+        return dao.getLatestUpdates();
     }
 
     @PUT

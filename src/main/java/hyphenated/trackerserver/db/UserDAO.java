@@ -1,8 +1,12 @@
 package hyphenated.trackerserver.db;
 
+import hyphenated.trackerserver.api.UpdateReport;
 import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.SqlQuery;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
+import org.skife.jdbi.v2.sqlobject.customizers.Mapper;
+
+import java.util.List;
 
 public interface UserDAO {
 
@@ -12,8 +16,13 @@ public interface UserDAO {
     @SqlUpdate("insert into users (name, token, trackerstate, stateversion) values (:name, :token, '', 0)")
     void insertNewUser(@Bind("name") String name, @Bind("token") String token);
 
-    @SqlUpdate("update users set trackerstate = :trackerstate, stateversion = stateversion + 1 where token = :token")
+    @SqlUpdate("update users set trackerstate = :trackerstate, stateversion = stateversion + 1, updatetime = 'now' where token = :token")
     void updateTrackerState(@Bind("token") String token, @Bind("trackerstate") String trackerState);
+
+    //this is retrieving how many seconds since they updated
+    @SqlQuery("select name, extract(epoch from date_trunc('second', ('now' - updatetime))) from users order by updatetime desc limit 10")
+    @Mapper(UpdateReportMapper.class)
+    List<UpdateReport> getLatestUpdates();
 
     @SqlQuery("select stateversion from users where name = :name")
     String getStateVersionByName(@Bind("name") String name);
