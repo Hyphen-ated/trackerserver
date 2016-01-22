@@ -13,14 +13,14 @@ public interface UserDAO {
     @SqlUpdate("delete from users where name = :name")
     void deleteUser(@Bind("name") String name);
 
-    @SqlUpdate("insert into users (name, token, trackerstate, stateversion, updatetime) values (:name, :token, '', 0, 'now')")
+    @SqlUpdate("insert into users (name, token, trackerstate, stateversion) values (:name, :token, '', cast(extract(epoch from current_timestamp) as integer))")
     void insertNewUser(@Bind("name") String name, @Bind("token") String token);
 
-    @SqlUpdate("update users set trackerstate = :trackerstate, stateversion = stateversion + 1, updatetime = 'now' where token = :token")
+    @SqlUpdate("update users set trackerstate = :trackerstate, stateversion = cast(extract(epoch from current_timestamp) as integer) where token = :token")
     void updateTrackerState(@Bind("token") String token, @Bind("trackerstate") String trackerState);
 
     //this is retrieving how many seconds since they updated
-    @SqlQuery("select name, extract(epoch from date_trunc('second', ('now' - updatetime))) from users order by updatetime desc limit 10")
+    @SqlQuery("select name, cast(extract(epoch from current_timestamp) as integer) - stateversion from users order by stateversion desc limit 10")
     @Mapper(UpdateReportMapper.class)
     List<UpdateReport> getLatestUpdates();
 
