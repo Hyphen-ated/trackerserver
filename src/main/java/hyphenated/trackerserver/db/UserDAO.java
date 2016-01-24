@@ -13,7 +13,7 @@ public interface UserDAO {
     @SqlUpdate("delete from users where name = :name")
     void deleteUser(@Bind("name") String name);
 
-    @SqlUpdate("insert into users (name, token, trackerstate, stateversion) values (:name, :token, '', cast(extract(epoch from current_timestamp) as integer))")
+    @SqlUpdate("insert into users (name, token, trackerstate, stateversion) values (:name, :token, '', 0)")
     void insertNewUser(@Bind("name") String name, @Bind("token") String token);
 
     @SqlUpdate("update users set trackerstate = :trackerstate, stateversion = cast(extract(epoch from current_timestamp) as integer) where token = :token")
