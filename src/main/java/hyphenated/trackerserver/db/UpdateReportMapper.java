@@ -12,6 +12,7 @@ public class UpdateReportMapper implements ResultSetMapper<UpdateReport>
 {
     public UpdateReport map(int index, ResultSet r, StatementContext ctx) throws SQLException
     {
+        // this is a username followed by how many seconds since they uploaded new info
         return new UpdateReport(r.getString(1), r.getInt(2));
     }
 }

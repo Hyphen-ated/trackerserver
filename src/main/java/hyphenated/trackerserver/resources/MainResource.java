@@ -29,8 +29,8 @@ public class MainResource {
 
     @GET
     @Path("/user/{name}/version")
-    public Optional<String> getStateVersion(@PathParam("name") String name) {
-        String val = dao.getStateVersionByName(name.toLowerCase(Locale.US));
+    public Optional<String> getUpdateTime(@PathParam("name") String name) {
+        String val = dao.getupdatetimeByName(name.toLowerCase(Locale.US));
         return Optional.fromNullable(val);
     }
 
@@ -45,6 +45,12 @@ public class MainResource {
     @Path("/userlist/")
     public List<UpdateReport> getUserList() {
         return dao.getLatestUpdates();
+    }
+
+    @GET
+    @Path("/servertime/")
+    public long getTime() {
+        return System.currentTimeMillis();
     }
 
     @PUT
