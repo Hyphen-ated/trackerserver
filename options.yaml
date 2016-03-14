@@ -19,6 +19,8 @@ server:
           port: 9081
 
 
+twitchClientId: cc0x4xs7f13phbtgco2xeflil2pu2uy
+
 database:
   # the name of your JDBC driver
   driverClass: org.postgresql.Driver
@@ -30,7 +32,7 @@ database:
   password: password
 
   # the JDBC URL
-  url: jdbc:postgresql://192.168.1.112/trackerserver
+  url: jdbc:postgresql://192.168.239.131/trackerserver
 
   # any properties specific to your JDBC driver:
   properties:

@@ -9,6 +9,8 @@ import javax.validation.constraints.*;
 public class TrackerServerConfiguration extends Configuration {
     private DataSourceFactory database = new DataSourceFactory();
 
+    private String twitchClientId;
+
     @JsonProperty("database")
     public void setDataSourceFactory(DataSourceFactory factory) {
         this.database = factory;
@@ -18,4 +20,7 @@ public class TrackerServerConfiguration extends Configuration {
     public DataSourceFactory getDataSourceFactory() {
         return database;
     }
+
+    @JsonProperty("twitchClientId")
+    public String getTwitchClientId() { return twitchClientId;}
 }

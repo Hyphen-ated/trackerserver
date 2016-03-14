@@ -4,6 +4,7 @@ package hyphenated.trackerserver.resources;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Optional;
+import hyphenated.trackerserver.TrackerServerConfiguration;
 import hyphenated.trackerserver.api.UpdateReport;
 import hyphenated.trackerserver.api.UpdateResponse;
 import hyphenated.trackerserver.api.UserCreatedResponse;
@@ -22,9 +23,11 @@ import java.util.UUID;
 @Produces(MediaType.APPLICATION_JSON)
 public class MainResource {
     private UserDAO dao;
+    private String twitchClientID;
     ObjectMapper mapper = new ObjectMapper();
-    public MainResource(UserDAO dao) {
+    public MainResource(TrackerServerConfiguration config, UserDAO dao) {
         this.dao = dao;
+        this.twitchClientID = config.getTwitchClientId();
     }
 
     @GET
@@ -50,7 +53,14 @@ public class MainResource {
     @GET
     @Path("/servertime/")
     public long getTime() {
-        return System.currentTimeMillis();
+        //integer division, throw away remainder (we dont care about millis)
+        return System.currentTimeMillis() / 1000;
+    }
+
+    @GET
+    @Path("/twitchclientid/")
+    public String getTwitchClientId() {
+        return twitchClientID;
     }
 
     @PUT

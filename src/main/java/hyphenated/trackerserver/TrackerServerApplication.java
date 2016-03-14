@@ -31,7 +31,7 @@ public class TrackerServerApplication extends Application<TrackerServerConfigura
         final DBIFactory factory = new DBIFactory();
         final DBI jdbi = factory.build(environment, config.getDataSourceFactory(), "postgresql");
         final UserDAO dao = jdbi.onDemand(UserDAO.class);
-        environment.jersey().register(new MainResource(dao));
+        environment.jersey().register(new MainResource(config, dao));
     }
 
 }
