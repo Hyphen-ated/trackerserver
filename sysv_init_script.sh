@@ -1,4 +1,9 @@
 #!/bin/sh
+# recommended: put this file at /etc/init.d/trackerserver
+# and then, (on a redhat-like distro), do chkconfig --add trackerserver
+# this makes it run as a service, so it starts at boot.
+# you might want to edit some of the variables below, especially "user"
+
 ### BEGIN INIT INFO
 # Provides: trackerserver
 # Required-Start:    $remote_fs $syslog
