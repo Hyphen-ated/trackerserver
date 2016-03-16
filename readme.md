@@ -5,7 +5,8 @@ have to capture the item tracker from someone's stream.
 
 It requires a java runtime. I only tested with 8, but it probably works on 7.
 
-To run it, first register your application at https://www.twitch.tv/settings/connections
+To run it, first register your application at https://www.twitch.tv/settings/connections .
+You'll need to enter a redirect URI which is going to point to this service, and it should look something like http://kanye.space:8000/tracker/setup
 
 Set up a database with the schema in createdb.sql (only tested on postgres so far)
 
