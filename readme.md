@@ -13,7 +13,7 @@ Then edit options.yaml to point to that database, and to have the client ID assi
 
 If you haven't downloaded a release jar for this project, you can make one with: mvn clean package
 
-Then do java -jar <release jar> server options.yaml
+Then do java -jar magazineservice.jar server options.yaml
 
 If you want to run it from source instead, then it's: java hyphenated.trackerserver.TrackerServerApplication server options.yaml
 
