@@ -44,6 +44,11 @@
             <artifactId>postgresql</artifactId>
             <version>9.2-1002-jdbc4</version>
         </dependency>
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.7.2</version>
+        </dependency>
     </dependencies>
 
     <build>

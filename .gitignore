@@ -14,3 +14,7 @@
 # Maven
 log/
 target/
+
+# trackerserver specific stuff
+logs/
+database.sqlite
