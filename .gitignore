@@ -18,3 +18,4 @@ target/
 # trackerserver specific stuff
 logs/
 database.sqlite
+isaac-item-tracker-server.pid

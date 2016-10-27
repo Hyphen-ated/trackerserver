@@ -2,8 +2,8 @@ server:
     requestLog:
         appenders:
           - type: file
-            currentLogFilename: /root/item-tracker-server/logs/access.log
-            archivedLogFilenamePattern: /root/item-tracker-server/logs/access-%d.log.gz
+            currentLogFilename: /root/isaac-item-tracker-server/logs/access.log
+            archivedLogFilenamePattern: /root/isaac-item-tracker-server/logs/access-%d.log.gz
     # if you want to change what port it runs on, you can do that here
     applicationConnectors:
         - type: http
@@ -35,7 +35,7 @@ database:
 
   # the JDBC URL
   #url: jdbc:postgresql://192.168.239.131/trackerserver
-  url: jdbc:sqlite:/root/item-tracker-server/database.sqlite
+  url: jdbc:sqlite:/root/isaac-item-tracker-server/database.sqlite
 
   # any properties specific to your JDBC driver:
   properties:
@@ -70,12 +70,12 @@ logging:
   appenders:
     - type: file
       # The file to which current statements will be logged.
-      currentLogFilename: /root/item-tracker-server/logs/trackerserver.log
+      currentLogFilename: /root/isaac-item-tracker-server/logs/trackerserver.log
 
       # When the log file rotates, the archived log will be renamed to this and gzipped. The
       # %d is replaced with the previous day (yyyy-MM-dd). Custom rolling windows can be created
       # by passing a SimpleDateFormat-compatible format as an argument: "%d{yyyy-MM-dd-hh}".
-      archivedLogFilenamePattern: /root/item-tracker-server/logs/trackerserver-%d.log.gz
+      archivedLogFilenamePattern: /root/isaac-item-tracker-server/logs/trackerserver-%d.log.gz
 
       # The number of archived files to keep.
       archivedFileCount: 14
