@@ -7,7 +7,7 @@ server:
     # if you want to change what port it runs on, you can do that here
     applicationConnectors:
         - type: http
-          port: 80
+          port: 8080
         # uncomment these and put in appropriate keystore stuff if you want SSL (you'll probably need to use keytool)
         #- type: https
         #  port: 8443
