@@ -15,7 +15,7 @@ Requirements
 
 * A Java runtime (only been tested with 8, but will probably work on 7)
   * On Ubuntu: `apt install default-jre`
-* A database (tested with PostgreSQL and SQLite3)
+*  The SQLite3 database
   * On Ubuntu: `apt install sqlite3`
 * A Java compiler (only if you plan on compiling the project from scratch)
   * On Ubuntu: `apt install default-jdk maven`
