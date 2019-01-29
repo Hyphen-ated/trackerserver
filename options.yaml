@@ -2,28 +2,30 @@ server:
     requestLog:
         appenders:
           - type: file
-            currentLogFilename: ./logs/access.log
-            archivedLogFilenamePattern: ./logs/access-%d.log.gz
+            currentLogFilename: /root/isaac-item-tracker-server/logs/access.log
+            archivedLogFilenamePattern: /root/isaac-item-tracker-server/logs/access-%d.log.gz
     # if you want to change what port it runs on, you can do that here
     applicationConnectors:
         - type: http
-          port: 9080
+          port: 8080
         # uncomment these and put in appropriate keystore stuff if you want SSL (you'll probably need to use keytool)
         #- type: https
         #  port: 8443
         #  keyStorePath: example.keystore
         #  keyStorePassword: example
         #  validateCerts: false
-    adminConnectors:
-        - type: http
-          port: 9081
+    adminConnectors: []
+    #adminConnectors:
+        #- type: http
+        #  port: 9081
 
 
-twitchClientId: cc0x4xs7f13phbtgco2xeflil2pu2uy
+twitchClientId: hl8x3rvuzzuw5vvj0r3a96ztcv0hfu2
 
 database:
   # the name of your JDBC driver
-  driverClass: org.postgresql.Driver
+  #driverClass: org.postgresql.Driver
+  driverClass: org.sqlite.JDBC
 
   # the username
   user: test
@@ -32,7 +34,8 @@ database:
   password: password
 
   # the JDBC URL
-  url: jdbc:postgresql://192.168.239.131/trackerserver
+  #url: jdbc:postgresql://192.168.239.131/trackerserver
+  url: jdbc:sqlite:/root/isaac-item-tracker-server/database.sqlite
 
   # any properties specific to your JDBC driver:
   properties:
@@ -67,12 +70,12 @@ logging:
   appenders:
     - type: file
       # The file to which current statements will be logged.
-      currentLogFilename: ./logs/trackerserver.log
+      currentLogFilename: /root/isaac-item-tracker-server/logs/trackerserver.log
 
       # When the log file rotates, the archived log will be renamed to this and gzipped. The
       # %d is replaced with the previous day (yyyy-MM-dd). Custom rolling windows can be created
       # by passing a SimpleDateFormat-compatible format as an argument: "%d{yyyy-MM-dd-hh}".
-      archivedLogFilenamePattern: ./logs/trackerserver-%d.log.gz
+      archivedLogFilenamePattern: /root/isaac-item-tracker-server/logs/trackerserver-%d.log.gz
 
       # The number of archived files to keep.
       archivedFileCount: 14

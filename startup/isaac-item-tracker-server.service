@@ -1,0 +1,21 @@
+# A systemd startup script for Ubuntu 16.04.1 LTS
+
+# Install it:
+#   cp isaac-item-tracker-server.service /etc/systemd/system/isaac-item-tracker-server.service
+
+# Start it:
+#   systemctl daemon-reload
+#   service isaac-item-tracker-server start
+
+# Make it run automatically on boot:
+#   systemctl enable isaac-item-tracker-server.service
+
+[Unit]
+Description=The server component of the The Binding of Isaac: Rebirth Isaac Item Tracker
+
+[Service]
+ExecStart=/usr/bin/java -jar /root/isaac-item-tracker-server/target/trackerserver-1.0-SNAPSHOT.jar server /root/isaac-item-tracker-server/options.yaml
+Type=simple
+
+[Install]
+WantedBy=multi-user.target
