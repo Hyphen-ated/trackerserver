@@ -9,12 +9,16 @@ import hyphenated.trackerserver.api.UpdateReport;
 import hyphenated.trackerserver.api.UpdateResponse;
 import hyphenated.trackerserver.api.UserCreatedResponse;
 import hyphenated.trackerserver.db.UserDAO;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -74,16 +78,22 @@ public class MainResource {
     @PUT
     @Path("/createuser/{twitchToken}")
     public UserCreatedResponse createUser(@PathParam("twitchToken") String twitchToken) {
-        URL twitchAuthUrl;
-        try {
-            twitchAuthUrl = new URL("https://api.twitch.tv/kraken?oauth_token=" + twitchToken);
-        } catch (MalformedURLException e) {
-            throw new BadRequestException("invalid token format");
-        }
+        String twitchAuthUrl = "https://api.twitch.tv/helix/users/";
+        
         String name;
         try {
-            JsonNode rootNode = mapper.readTree(twitchAuthUrl.openStream());
-            name = rootNode.get("token").get("user_name").asText().toLowerCase(Locale.US);
+            HttpGet req = new HttpGet(twitchAuthUrl);
+            
+            //see https://dev.twitch.tv/docs/authentication#sending-user-access-and-app-access-tokens
+            req.setHeader(new BasicHeader("Authorization", "Bearer " + twitchToken));
+            HttpClient client = new DefaultHttpClient();
+
+            HttpResponse resp = client.execute(req);
+            InputStream content = resp.getEntity().getContent();
+            JsonNode rootNode = mapper.readTree(content);
+            
+            //see https://dev.twitch.tv/docs/api/reference#get-users
+            name = rootNode.get("data").get(0).get("display_name").asText().toLowerCase(Locale.US);
         } catch (IOException | NullPointerException e) {
             throw new BadRequestException("token not recognized by twitch (or twitch api is down)");
         }
