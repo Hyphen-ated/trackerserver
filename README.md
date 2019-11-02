@@ -32,7 +32,7 @@ Building from Source
 Running
 -------
 
-* To run it, first (register your application on Twitch)[https://www.twitch.tv/settings/connections].
+* To run it, first register your application on Twitch ( https://www.twitch.tv/settings/connections )
 * Set up a database with the schema in `createdb.sql`.
   * For SQLite3: `sqlite3 database.sqlite < createdb.sql`
 * Edit `options.yaml`:
