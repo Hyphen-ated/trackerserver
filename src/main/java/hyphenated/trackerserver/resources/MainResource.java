@@ -86,6 +86,8 @@ public class MainResource {
             
             //see https://dev.twitch.tv/docs/authentication#sending-user-access-and-app-access-tokens
             req.setHeader(new BasicHeader("Authorization", "Bearer " + twitchToken));
+            //see https://discuss.dev.twitch.tv/t/requiring-oauth-for-helix-twitch-api-endpoints/23916
+            req.setHeader(new BasicHeader( "Client-ID", this.twitchClientID));
             HttpClient client = new DefaultHttpClient();
 
             HttpResponse resp = client.execute(req);

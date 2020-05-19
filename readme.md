@@ -13,10 +13,8 @@ This is the server software for The Binding of Isaac: Rebirth [item trackers](ht
 Requirements
 ------------
 
-* A Java runtime (only been tested with 8, but will probably work on 7)
+* A Java runtime (only been tested with 8, but will probably work on 7 or later)
   * On Ubuntu: `apt install default-jre`
-*  The SQLite3 database
-  * On Ubuntu: `apt install sqlite3`
 * A Java compiler (only if you plan on compiling the project from scratch)
   * On Ubuntu: `apt install default-jdk maven`
 
@@ -32,11 +30,11 @@ Building from Source
 Running
 -------
 
-* To run it, first (register your application on Twitch)[https://www.twitch.tv/settings/connections].
+* To run it, first register your application on Twitch ( https://www.twitch.tv/settings/connections )
 * Set up a database with the schema in `createdb.sql`.
   * For SQLite3: `sqlite3 database.sqlite < createdb.sql`
 * Edit `options.yaml`:
-  * Ensure that it points to the database.
+  * Ensure that the sqlite database file it's trying to point to is in a writeable location.
   * Ensure that it has your client ID from Twitch.
   * Ensure that it has the right path for the log files.
 * Start it with: `java -jar target/trackerserver-1.0-SNAPSHOT.jar server options.yaml`
